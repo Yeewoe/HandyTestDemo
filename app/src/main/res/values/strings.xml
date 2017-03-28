@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">HandyTestDemo</string>
+    <string name="tab_name_city_guide">CITY GUIDE</string>
+    <string name="tab_name_shop">SHOP</string>
+    <string name="tab_name_eat">EAT</string>
+</resources>
