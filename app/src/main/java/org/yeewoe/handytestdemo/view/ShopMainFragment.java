@@ -3,13 +3,8 @@ package org.yeewoe.handytestdemo.view;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
-
 import org.yeewoe.handytestdemo.R;
-import org.yeewoe.handytestdemo.presenter.CityGuideListPresenter;
 import org.yeewoe.handytestdemo.view.base.HandyBaseFragment;
-
-import butterknife.BindView;
 
 /**
  * Shop 主TAB页面

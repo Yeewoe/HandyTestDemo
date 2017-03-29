@@ -34,7 +34,7 @@ public class MainTabActivity extends HandyBaseActivity {
     @Override protected void loadSyncData() {
         mTabLayout.setupWithViewPager(mViewPager);
         MainTabViewPagerAdapter mAdapter = new MainTabViewPagerAdapter(getSupportFragmentManager());
-        mViewPager.setOffscreenPageLimit(mAdapter.getCount());
+//        mViewPager.setOffscreenPageLimit(mAdapter.getCount());
         mViewPager.setAdapter(mAdapter);
     }
 

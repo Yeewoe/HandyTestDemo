@@ -3,7 +3,7 @@ package org.yeewoe.handytestdemo.view;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.yeewoe.handytestdemo.R;
 import org.yeewoe.handytestdemo.presenter.CityGuideListPresenter;
@@ -19,7 +19,7 @@ import butterknife.BindView;
 
 public class CityGuideMainFragment extends HandyBaseFragment {
 
-    @BindView(R.id.recycler_view) PullToRefreshRecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view) XRecyclerView mRecyclerView;
     private CityGuideListPresenter cityGuideListPresenter;
 
 

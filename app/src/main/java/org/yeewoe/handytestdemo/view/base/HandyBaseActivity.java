@@ -1,10 +1,13 @@
 package org.yeewoe.handytestdemo.view.base;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Window;
+import android.view.WindowManager;
 
 import org.yeewoe.handytestdemo.R;
 
@@ -12,7 +15,7 @@ import butterknife.ButterKnife;
 
 /**
  * 基础Activity
- *
+ * <p>
  * Created by ivo on 2017/3/28.
  */
 
@@ -57,7 +60,6 @@ public abstract class HandyBaseActivity extends AppCompatActivity {
 
     @Override final protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         /** 以下方法的顺序不能调换 **/
         setContentView(getContentViewLayoutId());
         /** 使用ButterKnife **/
@@ -115,6 +117,7 @@ public abstract class HandyBaseActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             /** 这里可以做一些对Toolbar的公共处理， 也可以提取一个Holder类进行单独处理 **/
             mToolbarHolder = new ToolbarHolder(toolbar);
         }
