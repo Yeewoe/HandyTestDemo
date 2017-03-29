@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import org.yeewoe.handytestdemo.R;
-import org.yeewoe.handytestdemo.ui.CityGuideMainFragment;
+import org.yeewoe.handytestdemo.view.CityGuideMainFragment;
 
 /**
  * 主页面配置类

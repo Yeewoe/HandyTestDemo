@@ -1,4 +1,4 @@
-package org.yeewoe.handytestdemo.ui.base;
+package org.yeewoe.handytestdemo.view.base;
 
 import android.content.Intent;
 import android.os.Bundle;

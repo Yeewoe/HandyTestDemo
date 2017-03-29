@@ -1,4 +1,4 @@
-package org.yeewoe.handytestdemo.ui;
+package org.yeewoe.handytestdemo.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 
 import org.yeewoe.handytestdemo.R;
 import org.yeewoe.handytestdemo.config.MainTabConfig;
-import org.yeewoe.handytestdemo.ui.base.HandyBaseActivity;
+import org.yeewoe.handytestdemo.view.base.HandyBaseActivity;
 
 import butterknife.BindView;
 
