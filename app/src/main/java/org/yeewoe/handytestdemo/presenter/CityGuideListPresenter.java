@@ -1,9 +1,8 @@
 package org.yeewoe.handytestdemo.presenter;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
 
-import com.dinuscxj.refresh.RecyclerRefreshLayout;
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
 import org.yeewoe.handytestdemo.adapter.CityGuideListAdapter;
 import org.yeewoe.handytestdemo.callback.HandyCallback;
@@ -16,11 +15,11 @@ import org.yeewoe.handytestdemo.model.vo.CityGuideLineResultVo;
  */
 
 public class CityGuideListPresenter extends ComListPresenter<CityGuideLineResultVo.CityGuideLineEntityVo> {
-    private static final int PAGE_COUNT = 20;
+    private static final int PAGE_COUNT = 6;
     private CityGuideService cityGuideService;
 
-    public CityGuideListPresenter(Activity activity, RecyclerRefreshLayout refreshLayout, RecyclerView recyclerView) {
-        super(activity, refreshLayout, recyclerView, new CityGuideListAdapter(recyclerView.getContext()));
+    public CityGuideListPresenter(Activity activity, PullToRefreshRecyclerView recyclerView) {
+        super(activity, recyclerView, new CityGuideListAdapter(recyclerView.getContext()));
         this.cityGuideService = new CityGuideService();
     }
 

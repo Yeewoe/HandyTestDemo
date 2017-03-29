@@ -12,27 +12,24 @@ import org.yeewoe.handytestdemo.view.base.HandyBaseFragment;
 import butterknife.BindView;
 
 /**
- * City Guide 主TAB页面
+ * Shop 主TAB页面
  *
  * Created by ivo on 2017/3/28.
  */
 
-public class CityGuideMainFragment extends HandyBaseFragment {
-
-    @BindView(R.id.recycler_view) PullToRefreshRecyclerView mRecyclerView;
-    private CityGuideListPresenter cityGuideListPresenter;
+public class ShopMainFragment extends HandyBaseFragment {
 
 
-    public CityGuideMainFragment() {
+    public ShopMainFragment() {
     }
 
     public static Fragment newInstance() {
-        return new CityGuideMainFragment();
+        return new ShopMainFragment();
     }
 
 
     @Override protected int getContentViewLayoutId() {
-        return R.layout.fragment_city_guide_main;
+        return R.layout.fragment_shop_main;
     }
 
     @Override protected void bindViewListener(View contentView) {
@@ -41,10 +38,8 @@ public class CityGuideMainFragment extends HandyBaseFragment {
     }
 
     @Override protected void loadSyncData() {
-        cityGuideListPresenter = new CityGuideListPresenter(getActivity(), mRecyclerView);
     }
 
     @Override protected void loadAsyncData() {
-        cityGuideListPresenter.load();
     }
 }

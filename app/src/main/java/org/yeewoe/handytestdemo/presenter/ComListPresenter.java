@@ -1,17 +1,20 @@
 package org.yeewoe.handytestdemo.presenter;
 
 import android.app.Activity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.dinuscxj.refresh.RecyclerRefreshLayout;
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
+import org.yeewoe.handytestdemo.R;
 import org.yeewoe.handytestdemo.adapter.ComListAdapter;
 import org.yeewoe.handytestdemo.callback.HandyCallback;
 import org.yeewoe.handytestdemo.callback.UICallback;
 import org.yeewoe.handytestdemo.model.vo.ComEntityVo;
+import org.yeewoe.handytestdemo.view.widget.HandyLoadMoreView;
 
 import java.util.List;
 
@@ -20,9 +23,9 @@ import java.util.List;
  * Created by ivo on 2017/3/29.
  */
 
-public abstract class ComListPresenter<T extends ComEntityVo> implements RecyclerRefreshLayout.OnRefreshListener {
+public abstract class ComListPresenter<T extends ComEntityVo> implements PullToRefreshRecyclerView.PagingableListener, SwipeRefreshLayout.OnRefreshListener {
     private Activity activity;
-    private RecyclerRefreshLayout refreshLayout;
+    private final PullToRefreshRecyclerView pullToRefreshRecyclerView;
     private RecyclerView recyclerView;
     private ComListAdapter<T> adapter;
 
@@ -30,13 +33,27 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements Recycle
 
     protected abstract int getPageCount();
 
-    public ComListPresenter(Activity activity, RecyclerRefreshLayout refreshLayout, RecyclerView recyclerView, ComListAdapter<T> comListAdapter) {
+    public ComListPresenter(Activity activity, PullToRefreshRecyclerView pullToRefreshRecyclerView, ComListAdapter<T> comListAdapter) {
         this.activity = activity;
-        this.refreshLayout = refreshLayout;
-        this.recyclerView = recyclerView;
+        this.pullToRefreshRecyclerView = pullToRefreshRecyclerView;
+        this.recyclerView = pullToRefreshRecyclerView.getRecyclerView();
+
+        /** 配置recycler view **/
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
         this.recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        this.refreshLayout.setOnRefreshListener(this);
+
+        /** 配置刷新控件 **/
+        HandyLoadMoreView loadMoreView = new HandyLoadMoreView(activity, this.recyclerView);
+        loadMoreView.setLoadmoreString(activity.getString(R.string.loadmore));
+        loadMoreView.setLoadMorePadding(100);
+        this.pullToRefreshRecyclerView.setLoadMoreFooter(loadMoreView);
+        this.pullToRefreshRecyclerView.removeHeader();
+        this.pullToRefreshRecyclerView.setSwipeEnable(true);
+        this.pullToRefreshRecyclerView.setPagingableListener(this);
+        this.pullToRefreshRecyclerView.setOnRefreshListener(this);
+
+        this.pullToRefreshRecyclerView.onFinishLoading(true, false);
+
         this.adapter = comListAdapter;
         this.recyclerView.setAdapter(adapter);
     }
@@ -45,12 +62,8 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements Recycle
      * 开始加载数据
      */
     public void load() {
-        refreshLayout.setRefreshing(true);
+        pullToRefreshRecyclerView.setRefreshing(true);
         onRefresh();
-    }
-
-    @Override public void onRefresh() {
-        call(null, getPageCount(), new DefaultCallback(getActivity(), true));
     }
 
     public Activity getActivity() {
@@ -65,10 +78,17 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements Recycle
         return recyclerView;
     }
 
-    public RecyclerRefreshLayout getRefreshLayout() {
-        return refreshLayout;
+    public PullToRefreshRecyclerView getRefreshLayout() {
+        return pullToRefreshRecyclerView;
     }
 
+    @Override public void onRefresh() {
+        call(null, getPageCount(), new DefaultCallback(getActivity(), true));
+    }
+
+    @Override public void onLoadMoreItems() {
+        call(getAdapter().getLastItemPageParam(), getPageCount(), new DefaultCallback(getActivity(), false));
+    }
 
     private class DefaultCallback extends UICallback<T> {
 
@@ -80,17 +100,20 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements Recycle
         }
 
         @Override public void onUISuccess(T entity, List<T> entities) {
-            getRefreshLayout().setRefreshing(false);
+            getRefreshLayout().setOnRefreshComplete();
             if (isRefresh) {
                 adapter.setAll(entities);
             } else {
                 adapter.addAll(entities);
+                if (entities == null || entities.size() == 0) {
+                    getRefreshLayout().onFinishLoading(false, false);
+                }
             }
         }
 
         @Override public void onUIFail(int errorCode, String errorMsg) {
             /** 对错误的公共处理方法 **/
-            getRefreshLayout().setRefreshing(false);
+            getRefreshLayout().setOnRefreshComplete();
             Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
         }
     }

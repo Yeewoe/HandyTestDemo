@@ -32,4 +32,62 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <!-- city guide 列表，图片和文字组合item 的容器样式 -->
+    <style name="CityGuidePicAndContentItemLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">23dp</item>
+    </style>
+
+    <!-- city guide 列表，图片和文字组合item 的图片样式 -->
+    <style name="CityGuidePicAndContentItemImageView">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">108dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+    </style>
+
+    <!-- city guide 列表，图片和文字组合item 的title样式 -->
+    <style name="CityGuidePicAndContentItemTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_toRightOf">@+id/imgvi_pic</item>
+        <item name="android:lines">1</item>
+        <item name="android:textColor">#111</item>
+        <item name="android:textSize">@dimen/text_size_17</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- city guide 列表，图片和文字组合item 的content样式 -->
+    <style name="CityGuidePicAndContentItemContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@+id/txt_title</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_toRightOf">@+id/imgvi_pic</item>
+        <item name="android:textColor">#9a9a9a</item>
+        <item name="android:textSize">@dimen/text_size_17</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- city guide 列表，只有图片item 的容器样式 -->
+    <style name="CityGuideOnlyPicItemLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">25dp</item>
+    </style>
+
+    <!-- city guide 列表，只有图片item 的图片样式 -->
+    <style name="CityGuideOnlyPicItemImageView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+
 </resources>

@@ -30,6 +30,12 @@ public class CityGuideService extends ComBaseService {
         cityGuideNet = retrofit.create(CityGuideNet.class);
     }
 
+    /**
+     * 獲取city guide列表，異步網絡方法
+     * @param startPageId 分頁條件
+     * @param count 查詢數量
+     * @param callback 異步回調
+     */
     public void getLine(long startPageId, final int count, final HandyCallback<CityGuideLineResultVo.CityGuideLineEntityVo> callback) {
         Call<List<CityGuideLineResultVo>> call = cityGuideNet.listRepos(TEST_USER_NAME);
         call.enqueue(new Callback<List<CityGuideLineResultVo>>() {
@@ -37,14 +43,14 @@ public class CityGuideService extends ComBaseService {
                 /** 制造一些测试数据 **/
                 List<CityGuideLineResultVo.CityGuideLineEntityVo> result = new ArrayList<>();
                 for (int i = 0; i < count; i++) {
-                    result.add(CityGuideLineResultVo.CityGuideLineEntityVo.buildTest());
+                    result.add(CityGuideLineResultVo.CityGuideLineEntityVo.buildTest(i));
                 }
                 callback.onSuccess(null, result);
             }
 
             @Override public void onFailure(Call<List<CityGuideLineResultVo>> call, Throwable t) {
                 /** 临时错误处理 **/
-                callback.onFail(404);
+                handleFailure(callback, t, call);
             }
         });
     }

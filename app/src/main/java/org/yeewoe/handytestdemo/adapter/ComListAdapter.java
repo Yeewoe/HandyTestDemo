@@ -60,4 +60,9 @@ public abstract class ComListAdapter<T extends ComEntityVo> extends RecyclerView
     @NonNull protected List<T> getInnerData() {
         return innerData;
     }
+
+    /**
+     * 上一頁最後一條的分頁條件
+     */
+    public abstract Object getLastItemPageParam();
 }

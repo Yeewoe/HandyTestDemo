@@ -5,9 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.yeewoe.handytestdemo.R;
 import org.yeewoe.handytestdemo.model.vo.CityGuideLineResultVo;
+import org.yeewoe.handytestdemo.picture.ImageHelper;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * city guide 列表adapter
@@ -21,6 +27,10 @@ public class CityGuideListAdapter extends ComListAdapter<CityGuideLineResultVo.C
 
     public CityGuideListAdapter(Context context) {
         super(context);
+    }
+
+    @Override public Object getLastItemPageParam() {
+        return getInnerData().get(getInnerData().size() - 1).sid;
     }
 
     @Override public int getItemViewType(int position) {
@@ -45,23 +55,43 @@ public class CityGuideListAdapter extends ComListAdapter<CityGuideLineResultVo.C
             CityGuideLineResultVo.CityGuideLineEntityVo entityVo = getInnerData().get(position);
             if (holder instanceof CityGuidePictureAndContentViewHolder) {
                 CityGuidePictureAndContentViewHolder cityGuidePictureAndContentViewHolder = (CityGuidePictureAndContentViewHolder) holder;
+                cityGuidePictureAndContentViewHolder.bind(entityVo);
             } else if (holder instanceof CityGuideOnlyPictureViewHolder) {
                 CityGuideOnlyPictureViewHolder cityGuideOnlyPictureViewHolder = (CityGuideOnlyPictureViewHolder) holder;
+                cityGuideOnlyPictureViewHolder.bind(entityVo);
             }
         }
     }
 
-    private class CityGuidePictureAndContentViewHolder extends RecyclerView.ViewHolder {
+    class CityGuidePictureAndContentViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.imgvi_pic) ImageView mImgViPic;
+        @BindView(R.id.txt_title) TextView mTxtTitle;
+        @BindView(R.id.txt_content) TextView mTxtContent;
 
         public CityGuidePictureAndContentViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void bind(CityGuideLineResultVo.CityGuideLineEntityVo entity) {
+            ImageHelper.loadImage(mImgViPic, entity.picture);
+            mTxtTitle.setText(entity.title);
+            mTxtContent.setText(entity.content);
         }
     }
 
-    private class CityGuideOnlyPictureViewHolder extends RecyclerView.ViewHolder {
+    class CityGuideOnlyPictureViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.imgvi_pic) ImageView mImgViPic;
 
         public CityGuideOnlyPictureViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void bind(CityGuideLineResultVo.CityGuideLineEntityVo entity) {
+            ImageHelper.loadImage(mImgViPic, entity.picture);
         }
     }
 }
