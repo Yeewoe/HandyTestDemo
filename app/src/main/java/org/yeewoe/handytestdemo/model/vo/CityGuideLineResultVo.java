@@ -18,6 +18,18 @@ public class CityGuideLineResultVo extends ComResultVo {
 
     public static class CityGuideLineEntityVo extends ComEntityVo {
 
+        /**
+         * 發佈時間（一般都會有）
+         */
+        @SerializedName("time")
+        public long time;
+
+        /**
+         * 版本號（如果有，可用於做本地數據和網絡數據的比對）
+         */
+        @SerializedName("version")
+        public long version;
+
         @SerializedName("picture")
         public String picture;
 

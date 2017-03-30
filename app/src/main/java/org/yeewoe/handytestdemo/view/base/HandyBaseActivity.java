@@ -1,20 +1,18 @@
 package org.yeewoe.handytestdemo.view.base;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Window;
-import android.view.WindowManager;
 
 import org.yeewoe.handytestdemo.R;
+import org.yeewoe.handytestdemo.view.holder.ToolbarHolder;
 
 import butterknife.ButterKnife;
 
 /**
- * 基础Activity
+ * 基础Activity，封裝了一些固定流程，Toolbar的生成等
  * <p>
  * Created by ivo on 2017/3/28.
  */
@@ -74,14 +72,14 @@ public abstract class HandyBaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 初始化View
+     * 初始化View，也可以通过ButterKnife进行注解绑定控件
      */
     protected void initView() {
 
     }
 
     /**
-     * 绑定View事件
+     * 注解View事件,也可以通过ButterKnife进行注解註冊事件
      */
     protected void bindViewListener() {
 

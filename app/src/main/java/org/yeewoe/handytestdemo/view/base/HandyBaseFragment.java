@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 基础Fragment
+ * 基础Fragment，封裝了一些固定流程
  * Created by ivo on 2017/3/28.
  */
 

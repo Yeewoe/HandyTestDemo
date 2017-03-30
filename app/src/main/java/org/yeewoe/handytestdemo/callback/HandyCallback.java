@@ -3,7 +3,7 @@ package org.yeewoe.handytestdemo.callback;
 import java.util.List;
 
 /**
- * 专用Callback
+ * 全局专用Callback接口
  * Created by ivo on 2017/3/29.
  */
 

@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
 
 public abstract class ComResultVo {
 
-    @SerializedName("sid")
-    public int status;
+    /**
+     * 狀態碼，為0是成功
+     */
+    @SerializedName("status")
+    public Integer status;
 }

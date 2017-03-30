@@ -1,4 +1,4 @@
-package org.yeewoe.handytestdemo.view.base;
+package org.yeewoe.handytestdemo.view.holder;
 
 import android.support.v7.widget.Toolbar;
 

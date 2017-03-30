@@ -14,6 +14,9 @@ import org.yeewoe.handytestdemo.view.base.HandyBaseActivity;
 
 import butterknife.BindView;
 
+/**
+ * 主页面
+ */
 public class MainTabActivity extends HandyBaseActivity {
 
     @BindView(R.id.tabs) TabLayout mTabLayout;
@@ -34,7 +37,7 @@ public class MainTabActivity extends HandyBaseActivity {
     @Override protected void loadSyncData() {
         mTabLayout.setupWithViewPager(mViewPager);
         MainTabViewPagerAdapter mAdapter = new MainTabViewPagerAdapter(getSupportFragmentManager());
-//        mViewPager.setOffscreenPageLimit(mAdapter.getCount());
+        mViewPager.setOffscreenPageLimit(mAdapter.getCount()); // 設置緩存3個TAB頁面
         mViewPager.setAdapter(mAdapter);
     }
 

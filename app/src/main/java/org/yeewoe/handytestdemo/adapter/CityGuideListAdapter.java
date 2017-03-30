@@ -22,7 +22,13 @@ import butterknife.ButterKnife;
  */
 
 public class CityGuideListAdapter extends ComListAdapter<CityGuideLineResultVo.CityGuideLineEntityVo> {
+    /**
+     * 類型：圖片和文字
+     */
     private static final int TYPE_PICTURE_AND_CONTENT = 101;
+    /**
+     * 類型：只有圖片
+     */
     private static final int TYPE_ONLY_PICTURE = 102;
 
     public CityGuideListAdapter(Context context) {

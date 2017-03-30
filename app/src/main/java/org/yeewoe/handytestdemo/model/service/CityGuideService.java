@@ -37,9 +37,16 @@ public class CityGuideService extends ComBaseService {
      * @param callback 異步回調
      */
     public void getLine(long startPageId, final int count, final HandyCallback<CityGuideLineResultVo.CityGuideLineEntityVo> callback) {
-        Call<List<CityGuideLineResultVo>> call = cityGuideNet.listRepos(TEST_USER_NAME);
-        call.enqueue(new Callback<List<CityGuideLineResultVo>>() {
-            @Override public void onResponse(Call<List<CityGuideLineResultVo>> call, Response<List<CityGuideLineResultVo>> response) {
+        final String METHOD_NAME = "getLine";
+        logCall(METHOD_NAME, "startPageId=" + startPageId + ", count" + count);
+
+        Call<CityGuideLineResultVo> call = cityGuideNet.listRepos(TEST_USER_NAME);
+        call.enqueue(new Callback<CityGuideLineResultVo>() {
+            @Override public void onResponse(Call<CityGuideLineResultVo> call, Response<CityGuideLineResultVo> response) {
+                if (!handleSuccess(METHOD_NAME, response.body(), callback)) {
+                    return ;
+                }
+
                 /** 制造一些测试数据 **/
                 List<CityGuideLineResultVo.CityGuideLineEntityVo> result = new ArrayList<>();
                 for (int i = 0; i < count; i++) {
@@ -48,9 +55,16 @@ public class CityGuideService extends ComBaseService {
                 callback.onSuccess(null, result);
             }
 
-            @Override public void onFailure(Call<List<CityGuideLineResultVo>> call, Throwable t) {
+            @Override public void onFailure(Call<CityGuideLineResultVo> call, Throwable t) {
                 /** 临时错误处理 **/
-                handleFailure(callback, t, call);
+//                handleFailure(METHOD_NAME, callback, t, call);
+
+                /**  這裡只是為了測試， 總是返回成功的數據 **/
+                List<CityGuideLineResultVo.CityGuideLineEntityVo> result = new ArrayList<>();
+                for (int i = 0; i < count; i++) {
+                    result.add(CityGuideLineResultVo.CityGuideLineEntityVo.buildTest(i));
+                }
+                callback.onSuccess(null, result);
             }
         });
     }

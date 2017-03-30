@@ -6,30 +6,32 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.yeewoe.handytestdemo.adapter.ComListAdapter;
 import org.yeewoe.handytestdemo.callback.HandyCallback;
 import org.yeewoe.handytestdemo.callback.UICallback;
 import org.yeewoe.handytestdemo.model.vo.ComEntityVo;
+import org.yeewoe.handytestdemo.view.widget.HandyRecyclerView;
 
 import java.util.List;
 
 /**
- * 列表公共presenter
+ * 公共列表的presenter，可統一處理列表邏輯<br />
+ * 子類只需要完成接口調用部分就行，可參考{@link CityGuideListPresenter}
+ *
  * Created by ivo on 2017/3/29.
  */
 
-public abstract class ComListPresenter<T extends ComEntityVo> implements XRecyclerView.LoadingListener {
+public abstract class ComListPresenter<T extends ComEntityVo> implements HandyRecyclerView.LoadingListener {
     private Activity activity;
-    private XRecyclerView recyclerView;
+    private HandyRecyclerView recyclerView;
     private ComListAdapter<T> adapter;
 
     public abstract void call(Object startPageParam, int count, HandyCallback<T> defaultCallback);
 
     protected abstract int getPageCount();
 
-    public ComListPresenter(Activity activity, XRecyclerView recyclerView, ComListAdapter<T> comListAdapter) {
+    public ComListPresenter(Activity activity, HandyRecyclerView recyclerView, ComListAdapter<T> comListAdapter) {
         this.activity = activity;
         this.recyclerView = recyclerView;
 
@@ -58,13 +60,13 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements XRecycl
         return adapter;
     }
 
-    public XRecyclerView getRecyclerView() {
+    public HandyRecyclerView getRecyclerView() {
         return recyclerView;
     }
 
     @Override public void onRefresh() {
         /** 復位上拉 **/
-        recyclerView.setNoMore(true);
+        recyclerView.setNoMore(false);
         call(null, getPageCount(), new DefaultCallback(getActivity(), true));
     }
 
@@ -90,7 +92,7 @@ public abstract class ComListPresenter<T extends ComEntityVo> implements XRecycl
                 adapter.addAll(entities);
                 if (entities == null || entities.size() == 0) {
                     /** 當加載到最後一頁時，設置為無法上拉 **/
-                    recyclerView.setNoMore(false);
+                    recyclerView.setNoMore(true);
                 }
             }
         }

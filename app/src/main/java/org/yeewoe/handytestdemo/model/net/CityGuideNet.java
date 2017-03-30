@@ -22,5 +22,5 @@ public interface CityGuideNet {
      * @return 结果
      */
     @GET("users/{user}/repos")
-    Call<List<CityGuideLineResultVo>> listRepos(@Path("user") String user);
+    Call<CityGuideLineResultVo> listRepos(@Path("user") String user);
 }

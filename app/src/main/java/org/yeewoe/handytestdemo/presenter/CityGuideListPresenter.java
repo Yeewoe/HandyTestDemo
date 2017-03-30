@@ -2,12 +2,11 @@ package org.yeewoe.handytestdemo.presenter;
 
 import android.app.Activity;
 
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
 import org.yeewoe.handytestdemo.adapter.CityGuideListAdapter;
 import org.yeewoe.handytestdemo.callback.HandyCallback;
 import org.yeewoe.handytestdemo.model.service.CityGuideService;
 import org.yeewoe.handytestdemo.model.vo.CityGuideLineResultVo;
+import org.yeewoe.handytestdemo.view.widget.HandyRecyclerView;
 
 /**
  * city guide列表presenter
@@ -18,7 +17,7 @@ public class CityGuideListPresenter extends ComListPresenter<CityGuideLineResult
     private static final int PAGE_COUNT = 6;
     private CityGuideService cityGuideService;
 
-    public CityGuideListPresenter(Activity activity, XRecyclerView recyclerView) {
+    public CityGuideListPresenter(Activity activity, HandyRecyclerView recyclerView) {
         super(activity, recyclerView, new CityGuideListAdapter(recyclerView.getContext()));
         this.cityGuideService = new CityGuideService();
     }

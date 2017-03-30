@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 封装的公共列表adapter
+ * 封装的公共列表adapter，包括一些數據處理方面的動作等
  * Created by ivo on 2017/3/29.
  */
 

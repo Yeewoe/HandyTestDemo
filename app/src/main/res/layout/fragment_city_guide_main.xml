@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 事实上，类似这种纯列表页面，可以做个公共的layout -->
-<com.jcodecraeer.xrecyclerview.XRecyclerView
+<org.yeewoe.handytestdemo.view.widget.HandyRecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/recycler_view"
     android:layout_width="match_parent"

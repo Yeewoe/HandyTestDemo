@@ -27,11 +27,6 @@ public class EatMainFragment extends HandyBaseFragment {
         return R.layout.fragment_eat_main;
     }
 
-    @Override protected void bindViewListener(View contentView) {
-        super.bindViewListener(contentView);
-
-    }
-
     @Override protected void loadSyncData() {
     }
 
